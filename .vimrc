@@ -257,7 +257,7 @@ hi DraculaBoundary ctermbg=none
 " hi VertSplit cterm=none ctermfg=233
 " hi ignore ctermfg=234
 " hi Todo cterm=bold ctermfg=white ctermbg=darkred
-hi ColorColumn ctermbg=233
+hi ColorColumn ctermbg=239
 " hi DiffAdd ctermbg=22 ctermfg=none cterm=bold
 " hi DiffDelete ctermbg=52 ctermfg=none cterm=bold
 " hi DiffChange ctermbg=233 ctermfg=none cterm=none
