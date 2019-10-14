@@ -107,7 +107,7 @@ def blood(c, options = {}):
     c.colors.hints.bg = palette['background']
 
     ## Font color for hints.
-    c.colors.hints.fg = palette['pink']
+    c.colors.hints.fg = palette['purple']
 
     ## Hints
     c.hints.border = '1px solid ' + palette['background-alt']
@@ -119,7 +119,7 @@ def blood(c, options = {}):
     c.colors.keyhint.bg = palette['background']
 
     ## Text color for the keyhint widget.
-    c.colors.keyhint.fg = palette['pink']
+    c.colors.keyhint.fg = palette['purple']
 
     ## Highlight color for keys to complete the current keychain.
     c.colors.keyhint.suffix.fg = palette['selection']
@@ -306,7 +306,7 @@ def blood(c, options = {}):
     c.fonts.completion.category = 'bold'
     c.fonts.debug_console = font_size_str + ' monospace' 
     c.fonts.downloads = font_size_str + ' monospace'
-    c.fonts.hints = font_size_small_str + ' monospace'
+    c.fonts.hints = 'bold ' + font_size_str + ' monospace'
     c.fonts.keyhint = font_size_str + ' monospace'
     c.fonts.messages.error = font_size_str + ' monospace'
     c.fonts.messages.info = font_size_str + ' monospace'
