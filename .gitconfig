@@ -1,0 +1,16 @@
+[user]
+	email = nona@yo.biz
+	name = Morfaron
+[alias]
+	s = show
+	st = status
+	df = diff
+	g = grep -in
+	sf = show --name-status
+	lo = log --graph --abbrev-commit --decorate=short --date=relative --left-right --boundary
+	pure = clean -dfx
+	co = checkout
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
