@@ -5,9 +5,6 @@
 super + shift + p
 	j4-dmenu-desktop
 
-super + shift + e
-    $HOME/.scripts/getEmoji
-
 super + ctrl + shift + q
 	pkill xinit
 
@@ -15,16 +12,19 @@ super + z
 	sterminal
 
 super + r
-	via
-
-super + w
 	todo
 
 super + shift + b
 	$BROWSER
 
 super + e
+	via
+
+super + shift + e
 	st vifmrun
+
+super + ctrl + e
+	$HOME/.scripts/getEmoji
 
 Print
 	scrot
@@ -37,31 +37,31 @@ ctrl + Print
 #
 
 XF86AudioRaiseVolume
- pulseaudio-ctl up
+	pulseaudio-ctl up
 
 XF86AudioLowerVolume
- pulseaudio-ctl down
+	pulseaudio-ctl down
 
 XF86AudioMute
- pulseaudio-ctl mute
+	pulseaudio-ctl mute
 
 super + XF86AudioRaiseVolume
- playerctl next
+	playerctl next
 
 super + XF86AudioLowerVolume
- playerctl previous
+	playerctl previous
 
 super + XF86AudioMute
- playerctl play-pause
+	playerctl play-pause
 
 XF86MonBrightnessDown
- light -U 5 ; dunstify " [$(light)]" -r 323
+	light -U 5 ; dunstify " [$(light)]" -r 323
 
 XF86MonBrightnessUp
- light -A 5 ; dunstify " [$(light)]" -r 323
+	light -A 5 ; dunstify " [$(light)]" -r 323
 
 XF86TouchpadToggle
- $HOME/.scripts/touchpadToggle
+	$HOME/.scripts/touchpadToggle
 
 # make sxhkd reload its configuration files:
 super + shift + Escape
