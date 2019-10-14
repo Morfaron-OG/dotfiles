@@ -6,6 +6,8 @@
 
 config_version: 2
 settings:
+  auto_save.session:
+    global: false
   bindings.commands:
     global:
       normal:
@@ -27,7 +29,7 @@ settings:
   content.register_protocol_handler:
     https://mail.google.com?extsrc=mailto&url=%25s: true
   statusbar.hide:
-    global: false
+    global: true
   tabs.position:
     global: bottom
   tabs.show:
