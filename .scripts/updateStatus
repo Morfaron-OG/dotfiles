@@ -1,0 +1,7 @@
+#!/bin/bash
+
+STATUS_BAR_PID=$(ps -C status | grep status | awk '{print $1}')
+if [ ! -z $STATUS_BAR_PID ]
+then
+    kill $(ps --ppid $STATUS_BAR_PID | grep sleep | awk '{print $1}')
+fi

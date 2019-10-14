@@ -1,0 +1,5 @@
+#!/bin/sh
+while true; do
+    via -ro
+    sleep 60
+done

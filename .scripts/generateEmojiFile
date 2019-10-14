@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cat /usr/share/unicode-character-database/emoji/emoji-test.txt | sed -e "/^\s*#.*/d" -e "/.*non-fully.*\|skin.tone\|‍/d" -e "s/^[^#]*#\s//g" -e "/^\s*$/d" > /home/morfaron/.scripts/emoji

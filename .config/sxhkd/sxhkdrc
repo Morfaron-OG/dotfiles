@@ -1,0 +1,80 @@
+﻿#
+# spawn programs
+#
+
+super + shift + p
+	j4-dmenu-desktop
+
+super + shift + e
+    $HOME/.scripts/getEmoji
+
+super + ctrl + shift + q
+	pkill xinit
+
+super + z
+	sterminal
+
+super + r
+	via
+
+super + w
+	todo
+
+super + shift + b
+	$BROWSER
+
+super + e
+	st vifmrun
+
+Print
+	scrot
+
+ctrl + Print
+	scrot -sp
+
+#
+# Media keys
+#
+
+XF86AudioRaiseVolume
+ pulseaudio-ctl up
+
+XF86AudioLowerVolume
+ pulseaudio-ctl down
+
+XF86AudioMute
+ pulseaudio-ctl mute
+
+super + XF86AudioRaiseVolume
+ playerctl next
+
+super + XF86AudioLowerVolume
+ playerctl previous
+
+super + XF86AudioMute
+ playerctl play-pause
+
+XF86MonBrightnessDown
+ light -U 5 ; dunstify " [$(light)]" -r 323
+
+XF86MonBrightnessUp
+ light -A 5 ; dunstify " [$(light)]" -r 323
+
+XF86TouchpadToggle
+ $HOME/.scripts/touchpadToggle
+
+# make sxhkd reload its configuration files:
+super + shift + Escape
+	pkill -USR1 -x sxhkd
+
+#edit this file
+alt + ctrl + space
+	st nvim ~/.config/sxhkd/sxhkdrc
+
+# Toggle compositing
+super + ctrl + space
+	{pkill compton ,\
+	compton -b }
+
+super + x
+	slock

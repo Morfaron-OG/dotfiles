@@ -1,0 +1,48 @@
+#!/bin/sh
+
+# Remap keys
+setxkbmap -option caps:escape
+setxkbmap -option ctrl:swap_lalt_lctl
+# Hotkey daemon
+sxhkd &
+# Compositor
+compton -b &
+# Set Wallpaper
+$HOME/.fehbg &
+## Load appearance settings
+xsetroot -cursor_name left_ptr &
+export GTK2_RC_FILES="$HOME/.gtkrc-2.0" &
+xrdb merge .Xresources &
+## enable local fonts in .fonts directory
+xset +fp /usr/share/fonts/awesome-terminal-fonts &
+xset +fp /usr/share/fonts/misc &
+#xset +fp ~/.fonts &
+xset fp rehash &
+fc-cache -fv &
+## Automount removable media
+#devmon &
+## powersaving options
+xset s off &
+xset s noblank &
+xset s noexpose &
+xset c on &
+xset -dpms &
+# Notify about package updates
+update-checker 7200 &
+# Update status bar
+#$HOME/.scripts/status &
+slstatus &
+# Get audio working
+pulseaudio -k &
+pulseaudio --daemonize=no &
+pulseaudio-ctl mute-input &
+# Start telegram to irc server
+bitlbee -F &
+# Start daemon to disable touchpad when typing
+syndaemon -i 1 -K -R -d &
+# Start touchpad gestures
+libinput-gestures &
+# refresh files cache
+/home/morfaron/.scripts/refresh_files_cache &
+# Welcome message
+sleep 1 && notify-send "Welcome to DWM!" &

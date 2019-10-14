@@ -1,0 +1,17 @@
+#!/bin/bash
+
+ALL_EMOJI="$(<$HOME/.scripts/emoji)"
+
+if [ -z "$ALL_EMOJI" ]
+then
+    $HOME/.scripts/generateEmojiFile
+    ALL_EMOJI="$(<$HOME/.scripts/emoji)"
+fi
+
+EMOJI=$(echo "$ALL_EMOJI" | dmenu -i -f -p "Emoji" | tee >(awk '{printf "%s",$1}' | tee >(xsel -ip) | xsel -ib))
+
+
+if [ "$EMOJI" != "" ]
+then
+    echo -e "$EMOJI\n$ALL_EMOJI" |  sed -e "1p;/$EMOJI/d" > $HOME/.scripts/emoji
+fi

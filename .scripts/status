@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Set audio
+MUSIC_SYM=""
+VOLUME=$(pulseaudio-ctl full-status | awk '{print $1}')
+
+if [ ! -z $VOLUME ]; then
+    if [ "$(pulseaudio-ctl full-status | awk '{print $2}')" == "yes" ]; then
+        MUSIC_SYM=""
+    elif [ $VOLUME -le 1 ]; then
+        MUSIC_SYM=""
+    elif [ $VOLUME -le 33 ]; then
+        MUSIC_SYM=""
+    elif [ $VOLUME -le 66 ]; then
+        MUSIC_SYM=""
+    fi
+fi
+
+echo "$MUSIC_SYM $VOLUME%"
+
+# Check battery
+BAT_CAP=$(cat /sys/class/power_supply/BAT0/capacity)
+CHARGER_PLUGGED=$(cat /sys/class/power_supply/AC0/online)
+if [ $CHARGER_PLUGGED -eq 0 ]; then
+    if [ $BAT_CAP -le 10 ]; then
+        dunstify "Plug in the charger!" -r 993
+    fi
+fi

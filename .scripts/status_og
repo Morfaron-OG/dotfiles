@@ -1,0 +1,88 @@
+#!/bin/bash
+
+SEPARATOR="⏐"
+
+function VOLUME {
+    MUSIC_SYM=""
+    VOLUME=$(pulseaudio-ctl full-status | awk '{print $1}')
+
+    if [ ! -z $VOLUME ]; then
+        if [ "$(pulseaudio-ctl full-status | awk '{print $2}')" == "yes" ]; then
+            MUSIC_SYM=""
+        elif [ $VOLUME -le 1 ]; then
+            MUSIC_SYM=""
+        elif [ $VOLUME -le 33 ]; then
+            MUSIC_SYM=""
+        elif [ $VOLUME -le 66 ]; then
+            MUSIC_SYM=""
+        fi
+    fi
+
+    echo "$MUSIC_SYM $VOLUME%"
+}
+
+function WIFI {
+    NETWORK_SSID=$(nmcli connection show --active | grep wifi | awk '{print $1}')
+
+    if [[ ! -z $NETWORK_SSID ]]; then
+        echo " $NETWORK_SSID"
+    fi
+}
+
+function BATTERY {
+    BAT_SYM=" "
+    BAT_CAP=$(cat /sys/class/power_supply/BAT0/capacity)
+
+    if [ "$(cat /sys/class/power_supply/AC0/online)" == "1" ]; then
+        BAT_SYM=" "
+    elif [ $BAT_CAP -le 5 ]; then
+        BAT_SYM=" "
+        dunstify "Plug in the charger!" -r 993
+        systemctl suspend
+    elif [ $BAT_CAP -le 10 ]; then
+        BAT_SYM=" "
+        dunstify "Plug in the charger!" -r 993
+    elif [ $BAT_CAP -le 25 ]; then
+        BAT_SYM=" "
+    elif [ $BAT_CAP -le 50 ]; then
+        BAT_SYM=" "
+    elif [ $BAT_CAP -le 75 ]; then
+        BAT_SYM=" "
+    fi
+
+#    echo "$BAT_SYM$BAT_CAP%"
+}
+
+function WEATHER {
+    if [[ ! -z $cWIFI ]]; then
+        if [[ $(date +%M) -lt 1 ]] || [[ $(date +%M) -eq 30 ]] || [[ $cWEATHER == "" ]]; then
+            echo $(curl -s "wttr.in?format=1")
+        else
+            echo $cWEATHER
+        fi
+    fi
+}
+
+function TIME {
+    echo ⌚ $(date +"%F (%a) %R:%S")
+}
+
+function STATUS {
+    if [[ $cVOLUME != "" ]];  then echo -n "$cVOLUME $SEPARATOR ";  fi
+    if [[ $cWIFI != "" ]];    then echo -n "$cWIFI $SEPARATOR ";    fi
+    if [[ $cBATTERY != "" ]]; then echo -n "$cBATTERY $SEPARATOR "; fi
+    if [[ $cWEATHER != "" ]]; then echo -n "$cWEATHER $SEPARATOR "; fi
+    if [[ $cTIME != "" ]];    then echo -n "$cTIME ";               fi
+}
+
+VOLUME
+BATTERY
+#while true;  do
+#    cVOLUME=$(VOLUME)
+#    cWIFI=$(WIFI)
+#    cBATTERY=$(BATTERY)
+#    cWEATHER=$(WEATHER)
+#    cTIME=$(TIME)
+#    STATUS | xargs -I {} xsetroot -name {}
+#    sleep 0.8
+#done
