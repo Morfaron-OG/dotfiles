@@ -24,6 +24,7 @@ settings:
   content.notifications:
     https://backiee.com: false
     https://kprepublic.com: false
+    https://www.goodfon.com: false
     https://www.reddit.com: false
     https://www.youtube.com: false
   content.register_protocol_handler:
