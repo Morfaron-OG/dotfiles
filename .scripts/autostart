@@ -34,7 +34,8 @@ update-checker 7200 &
 slstatus &
 # Get audio working
 pulseaudio -k
-pulseaudio --start &
+sleep 1
+pulseaudio --start
 pulseaudio-ctl mute-input &
 # Start telegram to irc server
 bitlbee -F &
