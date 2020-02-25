@@ -9,7 +9,7 @@
 file="$HOME/.todo"
 touch "$file"
 height=$(wc -l "$file" | awk '{print $1}')
-prompt="Add/Del Reminder:"
+prompt="TODO:"
 
 cmd=$(dmenu -l "$height" -p "$prompt" "$@" < "$file")
 while [ -n "$cmd" ]; do
