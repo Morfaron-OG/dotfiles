@@ -33,10 +33,7 @@ update-checker 7200 &
 #$HOME/.scripts/status &
 slstatus &
 # Get audio working
-pulseaudio -k
-sleep 1
-pulseaudio --start
-pulseaudio-ctl mute-input &
+pulseaudio -k; sleep 1; pulseaudio --start
 # Start telegram to irc server
 bitlbee -F &
 # Start daemon to disable touchpad when typing

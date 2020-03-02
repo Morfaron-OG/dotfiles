@@ -15,7 +15,8 @@ super + r
 	todo
 
 super + shift + b
-	$BROWSER
+	{pkill stalonetray,\
+        stalonetray}
 
 super + e
 	via
@@ -69,7 +70,7 @@ super + shift + Escape
 
 #edit this file
 alt + ctrl + space
-	st nvim ~/.config/sxhkd/sxhkdrc
+	st vim ~/.config/sxhkd/sxhkdrc
 
 # Toggle compositing
 super + ctrl + space

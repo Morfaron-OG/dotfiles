@@ -21,10 +21,10 @@ Plug 'mhinz/vim-signify'
 "Plug 'vim-ctrlspace/vim-ctrlspace'
 Plug 'gnattishness/cscope_maps'
 Plug 'vim-syntastic/syntastic'
-Plug 'Valloric/YouCompleteMe'
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+"Plug 'Valloric/YouCompleteMe'
+"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 "Plug 'ryanoasis/vim-devicons'
-Plug 'lilydjwg/colorizer'
+"Plug 'lilydjwg/colorizer'
 "Plug 'dylanaraps/fff.vim'
 "Plug 'mcchrish/nnn.vim'
 Plug 'vifm/vifm.vim'

@@ -104,10 +104,10 @@ source $ZSH/oh-my-zsh.sh
 stty -ixon # Disable ctrl-s and ctrl-q
 alias ls="ls --group-directories-first --color=auto"
 alias l="ls -lh --group-directories-first --color=auto"
-alias vim="nvim"
-alias vi="nvim"
+#alias vim="nvim"
+#alias vi="nvim"
 alias vifm="vifmrun"
-alias honey="ssh honey@39.42.84.23 -p 1204 -C -t"
+alias honey="ssh honey@39.42.44.253 -p 1204 -C -t"
 alias sp="shellpic --shell24"
 alias dotfiles="/usr/bin/git --git-dir=$HOME/Git/dotfiles --work-tree=$HOME"
 
