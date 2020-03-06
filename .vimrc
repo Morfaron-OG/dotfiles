@@ -10,25 +10,6 @@
 "     \__\::::/      \__\/      \  \:\
 "         ~~~~                   \__\/
 "
-" Install all the plugins
-call plug#begin('~/.vim/plugged')
-Plug 'luochen1990/rainbow'
-"Plug 'sjl/vitality.vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'mhinz/vim-signify'
-"Plug 'vim-ctrlspace/vim-ctrlspace'
-Plug 'gnattishness/cscope_maps'
-Plug 'vim-syntastic/syntastic'
-"Plug 'Valloric/YouCompleteMe'
-"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
-"Plug 'ryanoasis/vim-devicons'
-"Plug 'lilydjwg/colorizer'
-"Plug 'dylanaraps/fff.vim'
-"Plug 'mcchrish/nnn.vim'
-Plug 'vifm/vifm.vim'
-call plug#end()
 
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
@@ -41,6 +22,28 @@ silent! while 0
     set nocompatible
 silent! endwhile
 
+" Install all the plugins
+call plug#begin('~/.vim/plugged')
+Plug 'luochen1990/rainbow'
+"Plug 'sjl/vitality.vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+Plug 'mhinz/vim-signify'
+Plug 'vim-ctrlspace/vim-ctrlspace'
+Plug 'gnattishness/cscope_maps'
+"Plug 'vim-syntastic/syntastic'
+"Plug 'Valloric/YouCompleteMe'
+"Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+"Plug 'ryanoasis/vim-devicons'
+"Plug 'lilydjwg/colorizer'
+"Plug 'dylanaraps/fff.vim'
+"Plug 'mcchrish/nnn.vim'
+"Plug 'vifm/vifm.vim'
+"Plug 'xolox/vim-misc'
+"Plug 'xolox/vim-session'
+call plug#end()
+
 " Allow backspacing over everything in insert mode.
 set backspace=indent,eol,start
 
@@ -48,7 +51,7 @@ set backspace=indent,eol,start
 set hidden
 
 " wait time for plugins
-set updatetime=100
+set updatetime=3000
 
 " keep 1000 lines of command line history
 set history=1000
@@ -66,12 +69,19 @@ set wildmode=longest,full
 " time out for key codes
 set ttimeout
 
-" wait up to 100ms after Esc for special key
-set ttimeoutlen=100
+" wait up to 10ms after Esc for special key
+if ! has('gui_running')
+  set ttimeoutlen=10
+  augroup FastEscape
+    autocmd!
+    au InsertEnter * set timeoutlen=0
+    au InsertLeave * set timeoutlen=1000
+  augroup END
+endif
 
 " Show a few lines of context around the cursor.  Note that this makes the
 " text scroll if you mouse-click near the start or end of the window.
-set scrolloff=0
+set scrolloff=10
 
 " Do incremental searching when it's possible to timeout.
 if has('reltime')
@@ -142,7 +152,8 @@ set softtabstop=4
 set expandtab
 
 " Color column 81
-set colorcolumn=81
+"set colorcolumn=81
+"let &colorcolumn=join(range(1,80),",")
 
 " Make yank use the system clipboard
 set clipboard=unnamed
@@ -155,13 +166,16 @@ set showmode
 set matchpairs+=<:>
 set wic
 set laststatus=2
-set timeoutlen=1000 ttimeoutlen=0
 set guioptions+=a
 
 " In many terminal emulators the mouse works just fine.  By enabling it you
 " can position the cursor, Visually select and scroll with the mouse.
 if has('mouse')
     set mouse=a
+endif
+
+if !has('nvim')
+    set ttymouse=sgr
 endif
 
 " Fix focus
@@ -224,11 +238,16 @@ nnoremap <F3> :set expandtab!<CR>
 inoremap <F3> <C-o>:set expandtab!<CR>
 cnoremap <F3> <C-c>:set expandtab!<CR>
 
+" Toggle numbers
+nnoremap <F4> :set nu! \| set rnu!<CR>
+inoremap <F4> <C-o>:set nu! \| set rnu!<CR>
+cnoremap <F4> <C-c>:set nu! \| set rnu!<CR>
+
 " Toggle showing whitespace
 nnoremap <F5> :set list!<CR>
 inoremap <F5> <C-o>:set list!<CR>
 cnoremap <F5> <C-c>:set list!<CR>
-
+   
 " Make the Tab key shift lines
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
@@ -236,15 +255,11 @@ inoremap <S-Tab> <C-d>
 
 " Use ctrl + up or down to move a line
 nnoremap <C-k> :m-2<CR>
-inoremap <C-k> <C-o>:m-2<CR>
-cnoremap <C-k> <C-c>:m-2<CR>
 nnoremap <C-j> :m+1<CR>
-inoremap <C-j> <C-o>:m+1<CR>
-cnoremap <C-j> <C-c>:m+1<CR>
 
 " Shortcut for file opener
-nnoremap <C-f> :FZF<CR>
-nnoremap <C-b> :Vifm<CR>
+"nnoremap <C-f> :FZF<CR>
+"nnoremap <C-b> :Vifm<CR>
 
 " COLORS
 
@@ -294,9 +309,9 @@ if has("autocmd")
         au!
 
         "au FocusLost * set norelativenumber
-        "au InsertEnter * set norelativenumber
+        "au InsertEnter * set nu! | set rnu!
         "au FocusGained * set relativenumber
-        "au InsertLeave * set relativenumber
+        "au InsertLeave * set nu! | set rnu!
         "au BufNewFile * tab sball
 
         " When editing a file, always jump to the last known cursor position.
@@ -319,6 +334,10 @@ let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowTo
 
 " Airline Options
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#keymap#enabled = 0
+let g:airline#extensions#po#enabled = 0
+"let g:airline_extensions = []
 
 " Signify Options
 let g:signify_vcs_list = [ 'git' ]
@@ -333,6 +352,10 @@ let g:syntastic_aggregate_errors = 1
 
 " CtrlSpace Options
 " let g:CtrlSpaceDefaultMappingKey = "<C-space> "
+nnoremap <silent><C-p> :CtrlSpace O<CR>
+let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
+let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
+let g:CtrlSpaceSaveWorkspaceOnExit = 1
 
 " YouCompleteMe Options
 let g:ycm_show_diagnostics_ui = 0
