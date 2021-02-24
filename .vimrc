@@ -42,6 +42,7 @@ Plug 'gnattishness/cscope_maps'
 "Plug 'vifm/vifm.vim'
 "Plug 'xolox/vim-misc'
 "Plug 'xolox/vim-session'
+Plug 'hari-rangarajan/CCTree'
 call plug#end()
 
 " Allow backspacing over everything in insert mode.
@@ -152,7 +153,7 @@ set softtabstop=4
 set expandtab
 
 " Color column 81
-"set colorcolumn=81
+set colorcolumn=81
 "let &colorcolumn=join(range(1,80),",")
 
 " Make yank use the system clipboard
@@ -186,7 +187,7 @@ let g:vitality_always_assume_iterm = 1
 " GUI (which always has colors).
 if &t_Co > 2 || has("gui_running")
    " Revert with ":syntax off".
-    syntax on
+    syntax enable
 
     " I like highlighting strings inside C comments.
     " Revert with ":unlet c_comment_strings".
@@ -272,7 +273,7 @@ hi DraculaBoundary ctermbg=none
 " hi VertSplit cterm=none ctermfg=233
 " hi ignore ctermfg=234
 " hi Todo cterm=bold ctermfg=white ctermbg=darkred
-hi ColorColumn ctermbg=239
+hi ColorColumn ctermbg=236
 " hi DiffAdd ctermbg=22 ctermfg=none cterm=bold
 " hi DiffDelete ctermbg=52 ctermfg=none cterm=bold
 " hi DiffChange ctermbg=233 ctermfg=none cterm=none
@@ -285,9 +286,11 @@ hi ColorColumn ctermbg=239
 " hi VertSplit ctermbg=none
 " hi SpecialKey ctermfg=242
 hi StatusLine cterm=reverse
+hi ModeMsg ctermfg=blue
 " hi LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 " hi CursorLineNr term=bold cterm=NONE ctermfg=Grey ctermbg=NONE gui=NONE guifg=Grey guibg=NONE
-hi CursorLine cterm=bold ctermbg=NONE ctermfg=NONE guibg=black guifg=NONE
+hi CursorLine cterm=bold ctermbg=236 ctermfg=NONE guibg=black guifg=NONE
+hi tclLineContinue ctermfg=215 ctermbg=NONE
 " hi Search cterm=NONE ctermfg=none ctermbg=darkgrey
 " hi Visual term=reverse cterm=reverse ctermfg=NONE ctermbg=NONE
 
@@ -313,6 +316,8 @@ if has("autocmd")
         "au FocusGained * set relativenumber
         "au InsertLeave * set nu! | set rnu!
         "au BufNewFile * tab sball
+        au BufRead,BufNewFile *.log     set filetype=messages
+        au BufRead,BufNewFile *message* set filetype=messages
 
         " When editing a file, always jump to the last known cursor position.
         " Don't do it when the position is invalid, when inside an event handler
@@ -352,7 +357,7 @@ let g:syntastic_aggregate_errors = 1
 
 " CtrlSpace Options
 " let g:CtrlSpaceDefaultMappingKey = "<C-space> "
-nnoremap <silent><C-p> :CtrlSpace O<CR>
+nnoremap <silent><C-p> :CtrlSpace o<CR>
 let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
 let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
 let g:CtrlSpaceSaveWorkspaceOnExit = 1
