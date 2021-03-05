@@ -16,3 +16,5 @@
 	tool = vimdiff
 [pull]
 	rebase = false
+[credential]
+	helper = store
