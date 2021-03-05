@@ -8,4 +8,4 @@ export XDG_CONFIG_DIRS=/usr/etc/xdg:/etc/xdg
 #export PANEL_FIFO PANEL_HEIGHT PANEL_FONT_FAMILY
 #[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec starx
 # Following automatically calls "startx" when you login:
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx -- -keeptty -nolisten tcp > ~/.xorg.log 2>&1
+#[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx -- -keeptty -nolisten tcp > ~/.xorg.log 2>&1
